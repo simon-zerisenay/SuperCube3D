@@ -7,22 +7,22 @@
 # include <errno.h>		// For error handling (perror, strerror)
 # include <stdbool.h>	// For bool types
 # include <unistd.h>	// For ssize_t type
+# include "../mlx/mlx.h"       // add path in makefile, compile mlx lib and bring the little .a here
 
 # define BUFFER_SIZE 69
 
-typedef struct s_xtr
-{
-	int				fd;
-	char			*id;
-	char			*path;
-	struct s_xtr	*next;
+typedef struct s_xtr// just turn the variable, into an array! only 4var
+{//just fix the intakes
+	char			*n_path;
+	char			*s_path;
+	char			*e_path;
+	char			*w_path;
 }	t_xtr;
 
-typedef struct s_clr
-{
-	char			id;
-	int				rgb[3];
-	struct t_clr	*next;
+typedef struct s_clr// just create an array with just the two colors
+{//just fix the intakes!
+	int				c_rgb[3];
+	int				f_rgb[3];
 }	t_clr;
 
 typedef struct s_map
@@ -43,10 +43,14 @@ typedef struct s_elmnt
 	t_clr	*clr;
 }	t_elmnt;
 
-typedef struct s_able
+typedef struct s_able// table of contents!
 {
-	int		phile;
-	t_elmnt	*lmnts;
+	void	*mlx;
+	void 	*win;
+	int		size_x;
+	int 	size_y;
+	int		file;
+	t_elmnt	*elements;
 }	t_able;
 
 /* parsing */
