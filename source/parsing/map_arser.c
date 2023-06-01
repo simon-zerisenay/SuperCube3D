@@ -2,19 +2,19 @@
 
 void	append_map(t_able *table, t_map *kid)
 {
-	if (!table->lmnts->map)
+	if (!table->elements->map)
 	{
-		table->lmnts->map = kid;
+		table->elements->map = kid;
 		kid->r_no = 0;
 	}
-	else if (table->lmnts->map)
+	else if (table->elements->map)
 	{
-		// table->lmnts->map->prev = kid;//this will turn this shit into a circular
-		while (table->lmnts->map->next)
-			table->lmnts->map = table->lmnts->map->next;
-		table->lmnts->map->next = kid;
-		kid->r_no = table->lmnts->map->r_no + 1;
-		kid->prev = table->lmnts->map;
+		// table->elements->map->prev = kid;//this will turn this shit into a circular
+		while (table->elements->map->next)
+			table->elements->map = table->elements->map->next;
+		table->elements->map->next = kid;
+		kid->r_no = table->elements->map->r_no + 1;
+		kid->prev = table->elements->map;
 	}
 }
 
@@ -39,12 +39,12 @@ bool	burn_map(t_able *table)
 {
 	t_map	tmp;
 
-	while (table->lmnts->map)
+	while (table->elements->map)
 	{
-		tmp = table->lmnts->map->next;
-		free(table->lmnts->map->row);
-		free(table->lmnts->map);
-		table->lmnts->map = tmp;
+		tmp = table->elements->map->next;
+		free(table->elements->map->row);
+		free(table->elements->map);
+		table->elements->map = tmp;
 	}
 	free(table->buf);
 	return (false);
@@ -57,10 +57,10 @@ bool	absorb_row(t_able *table)
 
 bool	splt_rw(t_able *table, int	splt)
 {
-	table->lmnts->map->row = f_calloc(splt + 1, sizeof(char));
-	if (!table->lmnts->map->row)
+	table->elements->map->row = f_calloc(splt + 1, sizeof(char));
+	if (!table->elements->map->row)
 		return (false);
-	f_strlcpy(table->lmnts->map->row, table->lmnts->buf, splt + 1);
+	f_strlcpy(table->elements->map->row, table->elements->buf, splt + 1);
 	
 }
 
@@ -97,7 +97,7 @@ int	map_ufacturer(t_map *map)//creates mapling and appends it to the mapther
 	return (69);
 }
 
-int	join_map(t_lmnts *lmnts, int join)
+int	join_map(t_elements *elements, int join)
 {
 	bool	continue;
 	t_map	tmp;
@@ -107,26 +107,26 @@ int	join_map(t_lmnts *lmnts, int join)
 	len[0] = 0;
 	len[1] = 0;
 	continue = 69;
-	tmp = f_last(lmnts->map)->row;
+	tmp = f_last(elements->map)->row;
 	while (continue)
 	{
 		if (!join)
 		{
-			if (!map_ufacturer(lmnts->map))
+			if (!map_ufacturer(elements->map))
 				return (-1);
-			tmp = end_of_world(lmnts->map);
-			len[0] = get_closer(lmnts->buf + len[1]) + 1;
+			tmp = end_of_world(elements->map);
+			len[0] = get_closer(elements->buf + len[1]) + 1;
 			tmp->row = f_calloc(len[0], sizeof(char));
 			if (!tmp->row)
 				return (-1);
-			f_strlcpy(tmp->row, lmnts->buf + len[1], len[0]);
+			f_strlcpy(tmp->row, elements->buf + len[1], len[0]);
 		}
 		else
 		{
-			len = get_closer(lmnts->buf) + 1;
-			lmnts->map = f_lstrjoin(lmnts->map, lmnts->buf, len);
+			len = get_closer(elements->buf) + 1;
+			elements->map = f_lstrjoin(elements->map, elements->buf, len);
 		}
-		res = chk_if_complete(lmnts->buf, &len[1]);
+		res = chk_if_complete(elements->buf, &len[1]);
 		if (res < 0)//checks if the buf is empty
 			return (-69);
 		else if (!res)
@@ -141,17 +141,17 @@ bool	main_map(t_able *table)
 	int	join;
 
 	join = false;
-	table->lmnts->map = NULL;
-	while (table->lmnts->rd)//keep the loop going until it reached \n or \0
+	table->elements->map = NULL;
+	while (table->elements->rd)//keep the loop going until it reached \n or \0
 	{
-		if (f_strchr(table->lmnts->buf, '\n') != f_strlen(table->lmnts->buf))
-			join = join_map(table->lmnts, join);//if < 0 then error
-			// table->lmnts->map = f_strdup(table->lmnts->buf);
+		if (f_strchr(table->elements->buf, '\n') != f_strlen(table->elements->buf))
+			join = join_map(table->elements, join);//if < 0 then error
+			// table->elements->map = f_strdup(table->elements->buf);
 		else
-			splt_rw(table, f_strnl(table->lmnts->buf));
+			splt_rw(table, f_strnl(table->elements->buf));
 		absorb_row(table);
-		free(table->lmnts->buf);
-		table->lmnts->rd = read(table->lmnts->fd, \
-		table->lmnts->buf, BUFFER_SIZE);
+		free(table->elements->buf);
+		table->elements->rd = read(table->elements->fd, \
+		table->elements->buf, BUFFER_SIZE);
 	}
 }

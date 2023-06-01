@@ -1,6 +1,6 @@
 #include "cub69d.h"
 
-bool	chk_other_elmnts(t_able *table)
+bool	chk_other_eelements(t_able *table)
 {
 	char	*buf;
 	ssize_t	rd;
@@ -19,13 +19,13 @@ bool	chk_other_elmnts(t_able *table)
 		}
 		if (!rd)
 			break ;
-		 if (!find_elmnts(table, buf, rd))
+		 if (!find_eelements(table, buf, rd))
 		 	return (false);
 		free (buf);
 	}
 }
 
-bool	find_elmnts(t_able *table, char *buf, ssize_t rd)
+bool	find_eelements(t_able *table, char *buf, ssize_t rd)
 {
 	ssize_t	i;
 
@@ -125,6 +125,6 @@ bool	clr_init(char *buf, t_able *table, int *l)
 
 bool	quality_control(t_able *table)
 {
-	if (!chk_other_elmnts(table))
+	if (!chk_other_eelements(table))
 		return (false);
 }
