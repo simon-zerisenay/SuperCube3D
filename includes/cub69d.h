@@ -39,6 +39,7 @@ typedef struct s_elmnt
 	int		fd;
 	char	*buf;
 	t_map	*map;
+	int		map_max;
 	t_xtr	*txtr;
 	t_clr	*clr;
 }	t_elmnt;
