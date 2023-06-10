@@ -6,9 +6,9 @@ int main(int argc, char *argv[])
 
 	if (!valid_args(argc, argv))
 		return (69);
-	if (table.phile = open(argv[1], O_RDONLY) < 0)
+	table.file = open(argv[1], O_RDONLY);
+	if (table.file < 0)
 		return (per_ret());
-	if (!quality_control(&table))
-		return (69);
+	quality_control(&table);
 	return (69 * 0);
 }

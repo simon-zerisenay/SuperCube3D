@@ -57,15 +57,21 @@ typedef struct s_able// table of contents!
 /* parsing */
 bool		valid_args(int argc, char *argv[]);
 
+void	quality_control(t_able *table);
+
 /* utils */
 
 //		--- utils0.c
 size_t		f_strlen(char *str);
 size_t		f_strcmp(char *str1, char *str2);
+int			f_atoi(char *str);
+char		*f_strchr(char *s, int c);
+
+//		---mem_utils.c
 char		*f_calloc(size_t amt, size_t size);
-int			f_atoi(const char *str);
-char		*f_strdup(const char *s1);
-char		*f_strchr(const char *s, int c);
+char		*f_strdup(char *s1);
+char		*f_lstrjoin(char *s1, char *s2, int len);
+char		*f_bufstr(char *buf, char *str, int rd);
 
 //		--- err_msg.c
 bool		err_msg(char *err);
