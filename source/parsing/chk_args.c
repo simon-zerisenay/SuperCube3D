@@ -2,9 +2,13 @@
 
 bool	f_alpha_under_num(char *str)
 {
+	if (!f_strncmp("./", str, 2))
+		str += 2;
+	else if (!f_strncmp("../", str, 3))
+		str += 3;
 	while (*str && ((*str >= 'a' && *str <= 'z') \
 		|| (*str >= 'A' && *str <= 'Z') || *str == '_' \
-		|| (*str >= '0' && *str <= '9')))
+		|| (*str >= '0' && *str <= '9') || *str == '/'))
 		str++;
 	return (f_strcmp(".cub", str));
 }

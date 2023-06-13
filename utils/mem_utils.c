@@ -53,9 +53,10 @@ char	*f_lstrjoin(char *s1, char *s2, int len)
 char	*f_bufstr(char *buf, char *str, int rd)
 {
 	char	*tmp;
-	int		i;
+	int		i[2];
 
-	i = -1;
+	i[0] = 0;
+	i[1] = -1;
 	// if (!rd)
 		// return
 	if (!str)
@@ -63,16 +64,19 @@ char	*f_bufstr(char *buf, char *str, int rd)
 	else
 		tmp = f_calloc((rd + 1) + f_strlen(str), sizeof(*str));
 	if (!tmp)
-		// return (NULL);//purge
+		return (NULL);//purge
 	if (str)
 	{
-		while (str[++i])
-			tmp[i] = str[i];
-		i--;
+		while (str[i[0]])
+		{
+			tmp[i[0]] = str[i[0]];
+			i[0]++;
+		}
 		free (str);
+		str = NULL;
 	}
-	while (++i < rd)
-		tmp[i] = buf[i];
+	while (++i[1] < rd)
+		tmp[i[0] + i[1]] = buf[i[1]];
 	return (tmp);
 }
 

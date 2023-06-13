@@ -66,6 +66,7 @@ size_t		f_strlen(char *str);
 size_t		f_strcmp(char *str1, char *str2);
 int			f_atoi(char *str);
 char		*f_strchr(char *s, int c);
+int			f_strncmp(char *s1, char *s2, size_t n);
 
 //		---mem_utils.c
 char		*f_calloc(size_t amt, size_t size);
