@@ -1,3 +1,5 @@
+.SILENT:
+
 NAME = cub3D
 
 CFLAGS = -Wall -Werror -Wextra -I includes
@@ -15,7 +17,7 @@ HEADER = ${addprefix includes/, cub69d.h}
 OBJS = ${SRC:c=o} ${UTILS:c=o}
 
 ${NAME} : ${OBJS} ${HEADER} Makefile
-	@${CC} ${CFLAGS} ${OBJS} -o $@
+	${CC} ${CFLAGS} ${OBJS} -o $@
 
 all : ${NAME}
 

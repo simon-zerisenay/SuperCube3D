@@ -24,37 +24,86 @@
 // 		free (buf);
 // 	}
 // }
-int	find_line(char **str, char *buf, int rd, int cnt);
+
+int	fnd_line_2(char **str, char *buf, int *i)
+{
+	*str = f_bufstr(buf + i[0], *str, i[1]);//down
+	// printf("cnt = %d\n", cnt);
+	printf("<%s>\n", *str);
+	//elemnt intit
+	free(*str);
+	*str = NULL;
+	i[0] += i[1];
+	return (0);
+}
+
+int	fnd_line_3(char **str, char *buf, int *i, int cnt)
+{
+	*str = f_bufstr(buf + i[0], *str, i[1]);//down
+	if (cnt)
+		return (cnt);
+	// printf("cnt = %d\n", cnt);
+	printf("<%s>\n", *str);
+	//elemnt intit
+	free(*str);
+	*str = NULL;
+	i[0] += i[1];
+	return (0);
+}
+
+int	find_line(char **str, t_able *table, int cnt)
+{
+	int		i[2];
+	char	*buf;
+	int		rd;
+
+	i[0] = 0;
+	buf = table->elements->buf;
+	rd = table->elements->rd;
+	while (i[0] < rd)
+	{
+		i[1] = 0;
+		while (i[0] < rd && buf[i[0]] == '\n')
+			i[0]++;
+		if (cnt && i[0])
+			cnt = fnd_line_2(str, buf, i);
+		while (i[0] + i[1] < rd && buf[i[0] + i[1]] != '\n')
+			i[1]++;
+		if (i[0] + i[1] == rd && buf[i[0] + i[1]] - 1 != '\n')
+			cnt = 69;
+		else
+			cnt = 0;
+		if (fnd_line_3(str, buf, i, cnt))
+			return (cnt);
+	}
+	return (0);
+}
 
 bool	chk_other_eelements(t_able *table)
 {
-	char	*buf;
 	char	*str;
 	int		cont;
 	// int		end;
-	ssize_t	rd;
 
-
-	buf = NULL;
 	cont = 0;
 	// i = 69;
 	// while (69)
 	// {
 		while (69)
 		{
-			buf = f_calloc(BUFFER_SIZE, sizeof(char));
-			rd = read(table->file, buf, BUFFER_SIZE);
-			if (rd < 0)
+			table->elements->buf = f_calloc(BUFFER_SIZE, sizeof(char));
+			table->elements->rd = read(table->file, table->elements->buf, BUFFER_SIZE);
+			if (table->elements->rd < 0)
 				break ;
 				//purge
-			if (!rd && !cont)
+			if (!table->elements->rd && !cont)
 				break ;
-			if (!rd && cont)
+			if (!table->elements->rd && cont)
 				break ;
 				// elemnt init
-			cont = find_line(&str, buf, rd, cont);
+			cont = find_line(&str, table, cont);
 			// printf("-%s-\n", str);
-			free(buf);
+			free(table->elements->buf);
 		}
 	// }
 	// txt = 0;
@@ -178,47 +227,4 @@ void	quality_control(t_able *table)
 	if (!chk_other_eelements(table))
 		return ;//purge instead
 	// return (true);
-}
-
-int	fnd_line_2(char **str, char *buf, int *i, int cnt)
-{
-	*str = f_bufstr(buf + i[0], *str, i[1]);//down
-	// printf("cnt = %d\n", cnt);
-	if (cnt)
-		return (cnt);
-	printf("af<%s>\n", *str);
-	//elemnt intit
-	free(*str);
-	*str = NULL;
-	i[0] += i[1];
-	return (cnt);
-}
-
-int	find_line(char **str, char *buf, int rd, int cnt)
-{
-	int	i[2];
-
-	i[0] = 0;
-	// i[2] = 0;
-	while (i[0] < rd)
-	{
-		i[1] = 0;
-		while (i[0] < rd && buf[i[0]] == '\n')
-			i[0]++;
-		if (cnt && i[0])
-			if (fnd_line_2(str, buf, i, cnt))
-				return (cnt);
-		// while (i[0] < rd && buf[i[0]] == ' ')
-		// 	i[0]++;
-		while (i[0] + i[1] < rd && buf[i[0] + i[1]] != '\n')
-			i[1]++;
-		// printf("i[1] = %d\n", i[1]);
-		if (i[0] + i[1] == rd && buf[i[0] + i[1]] - 1 != '\n')
-			cnt = 69;
-		else
-			cnt = 0;
-		if (fnd_line_2(str, buf, i, cnt))
-			return (cnt);
-	}
-	return (0);
 }
