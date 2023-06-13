@@ -1,29 +1,23 @@
 #include "cub69d.h"
 
-// bool	chk_other_eelements(t_able *table)
-// {
-// 	char	*buf;
-// 	ssize_t	rd;
+void	element_init(t_able *table, char *str)
+{
+	int	i;
 
-// 	// txt = 0;
-// 	buf = NULL;
-// 	rd = 69;
-// 	while (rd)
-// 	{
-// 		buf = f_calloc(BUFFER_SIZE, sizeof(char));
-// 		rd = read(table->phile, buf, BUFFER_SIZE);
-// 		if (rd < 0)
-// 		{
-// 			free (buf);
-// 			return (false);// take care of previously allocated mem
-// 		}
-// 		if (!rd)
-// 			break ;
-// 		 if (!find_eelements(table, buf, rd))
-// 		 	return (false);
-// 		free (buf);
-// 	}
-// }
+	i = -1;
+	while (str[++i] && str[i] == ' ')
+		;
+	if (!str[i])
+		return ;
+	if (!f_strncmp("NO ", str, 3) || !f_strncmp("SO ", str, 3)\
+		|| !f_strncmp("EA ", str, 3) || !f_strncmp("WE ", str, 3))
+		texture_init(table, str);
+	else if (!f_strncmp("F ", str, 2) || !f_strncmp("C ", str, 2))
+		color_init(table, str);
+	else//purge if not !!!!!
+		chk_if_map(table, str);//purge if not!!!
+		// purge if not!!!!
+}
 
 int	fnd_line_2(char **str, char *buf, int *i)
 {
