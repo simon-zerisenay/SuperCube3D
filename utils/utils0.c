@@ -128,6 +128,13 @@ int	f_strncmp(char *s1, char *s2, size_t n)
 	return (0);
 }
 
+int	f_isdigit(int c)
+{
+	while (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
 // f_mapjoin(char *main, char *str, int max)
 // {
 // 	int	len;

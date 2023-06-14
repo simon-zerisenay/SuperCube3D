@@ -2,7 +2,7 @@
 
 NAME = cub3D
 
-CFLAGS = -Wall -Werror -Wextra -I includes
+CFLAGS = -g3 -Wall -Werror -Wextra -I includes
 
 UTILS = ${addprefix utils/, utils0.c err_msg.c mem_utils.c}
 

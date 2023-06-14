@@ -1,5 +1,66 @@
 #include "cub69d.h"
 
+void	color_init(int **clr, char *str)
+{
+	int	i;
+
+	i = -1;
+	str += 2;
+	while (*str && *str == ' ')
+		str++;
+	while (++i < 3)
+	{
+		*clr[i] = f_atoi(str);
+		while (*str && f_isdigit(*str))
+			str++;
+		if (i < 2)
+		{
+			if (*str != ',')
+				return ;//purge
+		}
+		else if (*str && *str != ' ')
+			return ;//purge
+	}
+	while (*str && *str ==' ')
+		str++;
+	if (*str)
+		return ;//purge!
+}
+
+void	texture_init(char **txt, char *str)
+{
+	int	i[2];
+
+	i[0] = -1;
+	i[1] = -1;
+	str += 3;
+	while (*str && *str == ' ')
+		str++;
+	while (str[++i[0]])
+		if (str[i[0]] == ' ' && str[i[0] - 1] != '\\')
+			break ;
+	if (!str[i[0]] && !i[0])
+		return ;//purge
+	*txt = f_calloc(i[0] + 1, sizeof(**txt));
+	if (!*txt)
+		return ;//purge
+	while (++i[1] < i[0])
+		*txt[i[1]] = str[i[1]];
+	while (str[i[0]] && str[i[0]] == ' ')
+		i[0]++;
+	if (str[i[0]])
+		return ;//purge!!
+}
+
+void	chk_elements(t_able *table)
+{
+	if (!table->elements->txtr->n_path || !table->elements->txtr->s_path \
+		|| !table->elements->txtr->e_path || !table->elements->txtr->w_path)
+		return ;//purge incomplete!
+	if (!table->elements->clr->c_rgb || !table->elements->clr->f_rgb)
+		return ;//purge incomplete!
+}
+
 void	element_init(t_able *table, char *str)
 {
 	int	i;
@@ -9,13 +70,20 @@ void	element_init(t_able *table, char *str)
 		;
 	if (!str[i])
 		return ;
-	if (!f_strncmp("NO ", str, 3) || !f_strncmp("SO ", str, 3)\
-		|| !f_strncmp("EA ", str, 3) || !f_strncmp("WE ", str, 3))
-		texture_init(table, str);
-	else if (!f_strncmp("F ", str, 2) || !f_strncmp("C ", str, 2))
-		color_init(table, str);
+	if (!f_strncmp("NO ", str + i, 3))
+		texture_init(&table->elements->txtr->n_path, str + i);
+	else if (!f_strncmp("SO ", str + i, 3))
+		texture_init(&table->elements->txtr->s_path, str + i);
+	else if (!f_strncmp("EA ", str + i, 3))
+		texture_init(&table->elements->txtr->e_path, str + i);
+	else if (!f_strncmp("WE ", str + i, 3))
+		texture_init(&table->elements->txtr->w_path, str + i);
+	else if (!f_strncmp("C ", str + i, 2))
+		color_init(&table->elements->clr->c_rgb, str + i);
+	else if (!f_strncmp("F ", str + i, 2))
+		color_init(&table->elements->clr->f_rgb, str + i);
 	else//purge if not !!!!!
-		chk_if_map(table, str);//purge if not!!!
+		chk_elements(table);//purge if not!!!
 		// purge if not!!!!
 }
 
@@ -23,7 +91,7 @@ int	fnd_line_2(char **str, char *buf, int *i)
 {
 	*str = f_bufstr(buf + i[0], *str, i[1]);//down
 	// printf("cnt = %d\n", cnt);
-	printf("<%s>\n", *str);
+	// printf("<%s>\n", *str);
 	//elemnt intit
 	free(*str);
 	*str = NULL;
@@ -37,7 +105,7 @@ int	fnd_line_3(char **str, char *buf, int *i, int cnt)
 	if (cnt)
 		return (cnt);
 	// printf("cnt = %d\n", cnt);
-	printf("<%s>\n", *str);
+	// printf("<%s>\n", *str);
 	//elemnt intit
 	free(*str);
 	*str = NULL;
@@ -63,7 +131,7 @@ int	find_line(char **str, t_able *table, int cnt)
 			cnt = fnd_line_2(str, buf, i);
 		while (i[0] + i[1] < rd && buf[i[0] + i[1]] != '\n')
 			i[1]++;
-		if (i[0] + i[1] == rd && buf[i[0] + i[1]] - 1 != '\n')
+		if (i[0] + i[1] == rd && buf[i[0] + i[1] - 1] != '\n')
 			cnt = 69;
 		else
 			cnt = 0;
@@ -83,6 +151,7 @@ bool	chk_other_eelements(t_able *table)
 	// i = 69;
 	// while (69)
 	// {
+		str = NULL;
 		while (69)
 		{
 			table->elements->buf = f_calloc(BUFFER_SIZE, sizeof(char));
@@ -96,7 +165,7 @@ bool	chk_other_eelements(t_able *table)
 				break ;
 				// elemnt init
 			cont = find_line(&str, table, cont);
-			// printf("-%s-\n", str);
+			// printf("-%s-\n", str + i);
 			free(table->elements->buf);
 		}
 	// }

@@ -21,8 +21,8 @@ typedef struct s_xtr// just turn the variable, into an array! only 4var
 
 typedef struct s_clr// just create an array with just the two colors
 {//just fix the intakes!
-	int				c_rgb[3];
-	int				f_rgb[3];
+	int				*c_rgb;
+	int				*f_rgb;
 }	t_clr;
 
 typedef struct s_map
@@ -67,6 +67,7 @@ size_t		f_strcmp(char *str1, char *str2);
 int			f_atoi(char *str);
 char		*f_strchr(char *s, int c);
 int			f_strncmp(char *s1, char *s2, size_t n);
+int			f_isdigit(int c);
 
 //		---mem_utils.c
 char		*f_calloc(size_t amt, size_t size);
