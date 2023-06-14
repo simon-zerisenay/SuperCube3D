@@ -46,6 +46,7 @@ typedef struct s_elmnt
 
 typedef struct s_able// table of contents!
 {
+	int pp;
 	void	*mlx;
 	void 	*win;
 	int		size_x;

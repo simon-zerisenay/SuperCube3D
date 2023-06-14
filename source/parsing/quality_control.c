@@ -6,17 +6,20 @@ void	color_init(int **clr, char *str)
 
 	i = -1;
 	str += 2;
+	// printf("rgzz = ");
 	while (*str && *str == ' ')
 		str++;
 	while (++i < 3)
 	{
-		*clr[i] = f_atoi(str);
+		printf("loop -> %d ", i);
+		clr[0][i] = f_atoi(str);
 		while (*str && f_isdigit(*str))
 			str++;
 		if (i < 2)
 		{
 			if (*str != ',')
 				return ;//purge
+			str++;
 		}
 		else if (*str && *str != ' ')
 			return ;//purge
@@ -41,11 +44,11 @@ void	texture_init(char **txt, char *str)
 			break ;
 	if (!str[i[0]] && !i[0])
 		return ;//purge
-	*txt = f_calloc(i[0] + 1, sizeof(**txt));
-	if (!*txt)
+	txt[0] = f_calloc(i[0] + 1, sizeof(*txt));
+	if (!txt)
 		return ;//purge
 	while (++i[1] < i[0])
-		*txt[i[1]] = str[i[1]];
+		txt[0][i[1]] = str[i[1]];
 	while (str[i[0]] && str[i[0]] == ' ')
 		i[0]++;
 	if (str[i[0]])
@@ -54,6 +57,7 @@ void	texture_init(char **txt, char *str)
 
 void	chk_elements(t_able *table)
 {
+	table->pp = 69;
 	if (!table->elements->txtr->n_path || !table->elements->txtr->s_path \
 		|| !table->elements->txtr->e_path || !table->elements->txtr->w_path)
 		return ;//purge incomplete!
@@ -70,6 +74,7 @@ void	element_init(t_able *table, char *str)
 		;
 	if (!str[i])
 		return ;
+	// printf("<%s>\n", str + i);
 	if (!f_strncmp("NO ", str + i, 3))
 		texture_init(&table->elements->txtr->n_path, str + i);
 	else if (!f_strncmp("SO ", str + i, 3))
@@ -87,26 +92,32 @@ void	element_init(t_able *table, char *str)
 		// purge if not!!!!
 }
 
-int	fnd_line_2(char **str, char *buf, int *i)
+int	fnd_line_2(char **str, t_able *table, int *i)
 {
+	char	*buf;
+
+	buf = table->elements->buf;
 	*str = f_bufstr(buf + i[0], *str, i[1]);//down
 	// printf("cnt = %d\n", cnt);
 	// printf("<%s>\n", *str);
-	//elemnt intit
+	element_init(table, *str);
 	free(*str);
 	*str = NULL;
 	i[0] += i[1];
 	return (0);
 }
 
-int	fnd_line_3(char **str, char *buf, int *i, int cnt)
+int	fnd_line_3(char **str, t_able *table, int *i, int cnt)
 {
+	char	*buf;
+
+	buf = table->elements->buf;
 	*str = f_bufstr(buf + i[0], *str, i[1]);//down
 	if (cnt)
 		return (cnt);
 	// printf("cnt = %d\n", cnt);
 	// printf("<%s>\n", *str);
-	//elemnt intit
+	element_init(table, *str);
 	free(*str);
 	*str = NULL;
 	i[0] += i[1];
@@ -128,14 +139,14 @@ int	find_line(char **str, t_able *table, int cnt)
 		while (i[0] < rd && buf[i[0]] == '\n')
 			i[0]++;
 		if (cnt && i[0])
-			cnt = fnd_line_2(str, buf, i);
+			cnt = fnd_line_2(str, table, i);
 		while (i[0] + i[1] < rd && buf[i[0] + i[1]] != '\n')
 			i[1]++;
 		if (i[0] + i[1] == rd && buf[i[0] + i[1] - 1] != '\n')
 			cnt = 69;
 		else
 			cnt = 0;
-		if (fnd_line_3(str, buf, i, cnt))
+		if (fnd_line_3(str, table, i, cnt))
 			return (cnt);
 	}
 	return (0);
@@ -184,7 +195,17 @@ bool	chk_other_eelements(t_able *table)
 	// 	 	return (false);
 	// 	free (buf);
 	// }
+	// table->pp = 69;
 	return (true);
+}
+
+void	quality_control(t_able *table)
+{
+	// printf("%d\n", table->pp);
+	// chk_other_eelements(table);
+	if (!chk_other_eelements(table))
+		return ;//purge instead
+	// printf("af %d\n", table->pp);
 }
 
 // bool	find_eelements(t_able *table, char *buf, ssize_t rd)
@@ -284,10 +305,3 @@ bool	chk_other_eelements(t_able *table)
 // 	if (!rgb_init(buf + i, clr, &i))
 // 		return (free_ret(clr));
 // }
-
-void	quality_control(t_able *table)
-{
-	if (!chk_other_eelements(table))
-		return ;//purge instead
-	// return (true);
-}

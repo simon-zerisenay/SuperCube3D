@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
 {
 	t_able	table;
 
+	table.pp = 0;
 	if (!valid_args(argc, argv))
 		return (69);
 	table.file = open(argv[1], O_RDONLY);
