@@ -25,28 +25,37 @@ typedef struct s_clr// just create an array with just the two colors
 	int				*f_rgb;
 }	t_clr;
 
+typedef struct s_mapling
+{
+	int					r_no;
+	struct s_mapling	*prev;
+	char				*row;
+	struct s_mapling	*next;
+}	t_mapling;
+
 typedef struct s_map
 {
-	struct s_map	*prev;
-	int				r_no;
-	char			*row;
-	struct	s_map	*next;
+	t_mapling	*mapling;
+	int			map_max;
+	int			plyr_no;
+	char		plyr_pos;
 }	t_map;
+
 
 typedef struct s_elmnt
 {
 	int		rd;
-	int		fd;
+	int		stop;
+	// int		fd;
 	char	*buf;
 	t_map	*map;
-	int		map_max;
 	t_xtr	*txtr;
 	t_clr	*clr;
 }	t_elmnt;
 
 typedef struct s_able// table of contents!
 {
-	int pp;
+	// int pp;
 	void	*mlx;
 	void 	*win;
 	int		size_x;
@@ -55,10 +64,18 @@ typedef struct s_able// table of contents!
 	t_elmnt	*elements;
 }	t_able;
 
+
+void	print_elements(t_able *table);// made just for testing!
+void	print_map(t_able *table);
+int	find_mapling(char **str, t_able *table, int cnt);
+
 /* parsing */
 bool		valid_args(int argc, char *argv[]);
 
 void	quality_control(t_able *table);
+int		find_line(char **str, t_able *table, int cnt);
+
+void	map_init(t_able *table, char *str);
 
 /* utils */
 

@@ -5,7 +5,7 @@
 // function to check if the map only includes elmnts required for the map! and chks if anything sus is included
 int	hippity_scoppity(t_map *fuc_face)
 {
-	int	i[5];
+	int	i[5];4
 	char *str;
 
 	i[1] = 0;

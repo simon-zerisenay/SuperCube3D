@@ -6,9 +6,9 @@ CFLAGS = -g3 -Wall -Werror -Wextra -I includes
 
 UTILS = ${addprefix utils/, utils0.c err_msg.c mem_utils.c}
 
-PARSING = ${addprefix parsing/, chk_args.c quality_control.c}
+PARSING = ${addprefix parsing/, chk_args.c quality_control.c map_arser.c}
 
-# EXECUTION = ${addprefix execution/, }
+# EXECUTION = ${addprefix execution/, execution.c init.c}
 
 SRC = ${addprefix source/, main.c ${PARSING}}
 
