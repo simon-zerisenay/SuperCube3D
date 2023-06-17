@@ -53,7 +53,7 @@ void	texture_init(char **txt, char *str)
 		return ;//purge!!
 }
 
-void	chk_elements(t_able *table, char *str)
+void	chk_elements(t_able *table)
 {
 	// table->pp = 69;
 	table->elements->stop = 1;
@@ -62,7 +62,7 @@ void	chk_elements(t_able *table, char *str)
 		return ;//purge incomplete!
 	if (!table->elements->clr->c_rgb || !table->elements->clr->f_rgb)
 		return ;//purge incomplete!
-	find_mapling_3(&str, table, )
+	// find_mapling_3(&str, table, )
 }
 
 void	element_init(t_able *table, char *str)
@@ -70,25 +70,29 @@ void	element_init(t_able *table, char *str)
 	int	i;
 
 	i = -1;
-	while (str[++i] && str[i] == ' ')
-		;
-	if (!str[i])
-		return ;
-	if (!f_strncmp("NO ", str + i, 3))
-		texture_init(&table->elements->txtr->n_path, str + i);
-	else if (!f_strncmp("SO ", str + i, 3))
-		texture_init(&table->elements->txtr->s_path, str + i);
-	else if (!f_strncmp("EA ", str + i, 3))
-		texture_init(&table->elements->txtr->e_path, str + i);
-	else if (!f_strncmp("WE ", str + i, 3))
-		texture_init(&table->elements->txtr->w_path, str + i);
-	else if (!f_strncmp("C ", str + i, 2))
-		color_init(&table->elements->clr->c_rgb, str + i);
-	else if (!f_strncmp("F ", str + i, 2))
-		color_init(&table->elements->clr->f_rgb, str + i);
-	else//purge if not !!!!!
-		chk_elements(table, str);//purge if not!!!
-		// purge if not!!!!
+	if (!table->elements->stop)
+	{
+		while (str[++i] && str[i] == ' ')
+			;
+		if (!str[i])
+			return ;
+		if (!f_strncmp("NO ", str + i, 3))
+			texture_init(&table->elements->txtr->n_path, str + i);
+		else if (!f_strncmp("SO ", str + i, 3))
+			texture_init(&table->elements->txtr->s_path, str + i);
+		else if (!f_strncmp("EA ", str + i, 3))
+			texture_init(&table->elements->txtr->e_path, str + i);
+		else if (!f_strncmp("WE ", str + i, 3))
+			texture_init(&table->elements->txtr->w_path, str + i);
+		else if (!f_strncmp("C ", str + i, 2))
+			color_init(&table->elements->clr->c_rgb, str + i);
+		else if (!f_strncmp("F ", str + i, 2))
+			color_init(&table->elements->clr->f_rgb, str + i);
+		else//purge if not !!!!!
+			chk_elements(table);//purge if not!!!
+	}
+	if (table->elements->stop)
+		map_intits(table->elements->map, str);
 }
 
 int	fnd_line_2(char **str, t_able *table, int *i)
@@ -98,11 +102,8 @@ int	fnd_line_2(char **str, t_able *table, int *i)
 	buf = table->elements->buf;
 	*str = f_bufstr(buf + i[0], *str, i[1]);//down
 	element_init(table, *str);
-	if (!table->elements->stop)
-	{
-		free(*str);
-		*str = NULL;
-	}
+	free(*str);
+	*str = NULL;
 	i[0] += i[1];
 	return (0);
 }
@@ -116,11 +117,8 @@ int	fnd_line_3(char **str, t_able *table, int *i, int cnt)
 	if (cnt)
 		return (cnt);
 	element_init(table, *str);
-	if (!table->elements->stop)
-	{
-		free(*str);
-		*str = NULL;
-	}
+	free(*str);
+	*str = NULL;
 	i[0] += i[1];
 	return (0);
 }
@@ -134,7 +132,7 @@ int	find_line(char **str, t_able *table, int cnt)
 	i[0] = 0;
 	buf = table->elements->buf;
 	rd = table->elements->rd;
-	while (i[0] < rd && !table->elements->stop)
+	while (i[0] < rd)
 	{
 		i[1] = 0;
 		while (i[0] < rd && buf[i[0]] == '\n')
@@ -168,10 +166,7 @@ void	chk_other_eelements(t_able *table)
 			return ;//purge
 		if (!table->elements->rd)
 			return ;//then chk if last line has been retrieved
-		if (!table->elements->stop)
-			cont = find_line(&str, table, cont);
-		else
-			cont = find_mapling(&str, table, cont);
+		cont = find_line(&str, table, cont);
 		free(table->elements->buf);
 	}
 	return ;

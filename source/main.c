@@ -84,7 +84,7 @@ void	print_map(t_able *table)
 	tmp = table->elements->map->mapling;
 	while (tmp)
 	{
-		printf("<%s\n>", tmp->row);
+		printf("<%s>\n", tmp->row);
 		tmp = tmp->next;
 	}
 }

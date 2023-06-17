@@ -67,7 +67,8 @@ typedef struct s_able// table of contents!
 
 void	print_elements(t_able *table);// made just for testing!
 void	print_map(t_able *table);
-int	find_mapling(char **str, t_able *table, int cnt);
+int		find_mapling(char **str, t_able *table, int cnt);
+void	map_intits(t_map *map, char *str);
 
 /* parsing */
 bool		valid_args(int argc, char *argv[]);
