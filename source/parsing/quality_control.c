@@ -165,7 +165,15 @@ void	chk_other_eelements(t_able *table)
 		if (table->elements->rd < 0)
 			return ;//purge
 		if (!table->elements->rd)
+		{
+			if (cont)
+			{
+				element_init(table, str);
+				free(str);
+			}
+			free(table->elements->buf);
 			return ;//then chk if last line has been retrieved
+		}
 		cont = find_line(&str, table, cont);
 		free(table->elements->buf);
 	}

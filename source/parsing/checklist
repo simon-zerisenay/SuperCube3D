@@ -1,4 +1,6 @@
-gotta update the read to read the last line without failiure!!!
+gotta update the read to read the last line without failiure!!! -> done
+update on above, now it does get the last line tho, extra testing is required!
+and do test with multiple maps!!
 
 gotta create purge
 
@@ -9,3 +11,5 @@ and do other minor clearance!!!
 and improve em code
 
 Ig thats all for the parsing!!!
+
+extras, adjust the padding too!
