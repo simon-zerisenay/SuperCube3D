@@ -75,7 +75,7 @@ void	element_init(t_able *table, char *str)
 		while (str[++i] && str[i] == ' ')
 			;
 		if (!str[i])
-			return ;
+			return ;// purge!!
 		if (!f_strncmp("NO ", str + i, 3))
 			texture_init(&table->elements->txtr->n_path, str + i);
 		else if (!f_strncmp("SO ", str + i, 3))
