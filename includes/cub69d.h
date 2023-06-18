@@ -78,6 +78,9 @@ int		find_line(char **str, t_able *table, int cnt);
 
 void	map_init(t_able *table, char *str);
 
+void	rmrf_everything(t_able *table);
+
+
 /* utils */
 
 //		--- utils0.c

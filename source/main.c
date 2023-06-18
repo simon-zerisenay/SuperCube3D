@@ -5,31 +5,31 @@ void	create_clr(t_clr **clr)
 	int	i;
 
 	i = -1;
-	*clr = malloc(1 * sizeof(t_clr));
-	if (!*clr)
+	clr[0] = malloc(1 * sizeof(t_clr));
+	if (!clr[0])
 		return ;//purge 1
-	(*clr)->c_rgb = malloc(3 * sizeof(int));
-	if (!(*clr)->c_rgb)
+	(clr[0])->c_rgb = malloc(3 * sizeof(int));
+	if (!(clr[0])->c_rgb)
 		return ;//purge 2
-	(*clr)->f_rgb = malloc(3 * sizeof(int));
-	if (!(*clr)->c_rgb)
+	(clr[0])->f_rgb = malloc(3 * sizeof(int));
+	if (!(clr[0])->c_rgb)
 		return ;//purge 3
 	while (++i < 3)
 	{
-		(*clr)->c_rgb[i] = 0;
-		(*clr)->f_rgb[i] = 0;
+		(clr[0])->c_rgb[i] = 0;
+		(clr[0])->f_rgb[i] = 0;
 	}
 }
 
 void	create_txtr(t_xtr **txt)
 {
-	*txt = malloc(1 * sizeof(t_xtr));
-	if (!*txt)
+	txt[0] = malloc(1 * sizeof(t_xtr));
+	if (!txt[0])
 		return ;//purge
-	(*txt)->n_path = NULL;
-	(*txt)->s_path = NULL;
-	(*txt)->e_path = NULL;
-	(*txt)->w_path = NULL;
+	(txt[0])->n_path = NULL;
+	(txt[0])->s_path = NULL;
+	(txt[0])->e_path = NULL;
+	(txt[0])->w_path = NULL;
 }
 
 void	create_map(t_map **map)
@@ -45,15 +45,15 @@ void	create_map(t_map **map)
 
 void	create_element(t_elmnt **elemnt)
 {
-	*elemnt = malloc(1 * sizeof(t_elmnt));
-	if (!*elemnt)
+	elemnt[0] = malloc(1 * sizeof(t_elmnt));
+	if (!elemnt[0])
 		return ;//purge
-	(*elemnt)->buf = NULL;
-	(*elemnt)->clr = NULL;
-	(*elemnt)->map = NULL;
-	(*elemnt)->txtr = NULL;
-	(*elemnt)->stop = 0;
-	(*elemnt)->rd = 0;
+	(elemnt[0])->buf = NULL;
+	(elemnt[0])->clr = NULL;
+	(elemnt[0])->map = NULL;
+	(elemnt[0])->txtr = NULL;
+	(elemnt[0])->stop = 0;
+	(elemnt[0])->rd = 0;
 	// (*elemnt)->map_max = 0;
 }
 
@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
 	quality_control(&table);
 	print_elements(&table);
 	print_map(&table);
-	// rmrf_everything();
+	rmrf_everything(&table);
 	// print_elements(&table);
 	    /*
         1. Create an empty window 
