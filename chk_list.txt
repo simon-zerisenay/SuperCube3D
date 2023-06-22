@@ -1,0 +1,47 @@
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+void	*mlx_init(); -> int glfwInit();
+
+The glfwInit()
+function initializes the GLFW library and should be called before any other GLFW 
+functions. It returns an int value indicating whether the initialization was successful or not. 
+If initialization fails, you can handle the error accordingly.
+
+mlx_init
+Initializes the MLX library. Must be called before ANY other function. Will return NULL if 
+initialization failed.
+
+
+NOTE!, for mlx u need to take the return value into the mlx struct!
+
+
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+mlx_new_window (MiniLibX) -> glfwCreateWindow (GLFW)
+
+void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title); 
+
+GLFWwindow* glfwCreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
+
+glfwCreateWindow
+function creates a new window with the specified width, height, and title.
+It returns a pointer to a GLFWwindow instance, which should be saved for future reference.
+
+mlx_new_window
+Creates a new window instance. It will return a window instance pointer. This should be saved 
+for future reference.
+
+** Create a new window.   (void *mlx_ptr, int size_x, int size_y, char *title); 
+**
+** @param	void *mlx_ptr	the mlx instance pointer;
+** @param	int  size_x		the width of the window;
+** @param	int  size_y		the height of the window;
+** @param	char *title		the title of the window;
+** @return	void*			the window instance pointer.
+
+
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+mlx_clear_window (MiniLibX) -> glClearColor, glClear
+
+
+
+<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+lm fao, we already using mlx, u useless bastard wasting time on random shits!

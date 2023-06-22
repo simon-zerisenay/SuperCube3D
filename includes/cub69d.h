@@ -7,7 +7,9 @@
 # include <errno.h>		// For error handling (perror, strerror)
 # include <stdbool.h>	// For bool types
 # include <unistd.h>	// For ssize_t type
-# include "../mlx/mlx.h"       // add path in makefile, compile mlx lib and bring the little .a here
+# include <GLFW/glfw3.h>
+// # include "../mlx/mlx.h"       // add path in makefile, compile mlx lib and bring the little .a here
+# include <mlx.h>
 
 # define BUFFER_SIZE 69
 

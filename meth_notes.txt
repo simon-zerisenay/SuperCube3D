@@ -1,0 +1,228 @@
+root (√)
+
+->Character movements (Points and Vectors)
+
+so to calculate a characters movements u will need to use Vectors
+
+and vector is a quantity that has both magnitude (length) and direction.
+
+so v = (0 + L), (angle)dir + (length)magnitude
+
+but in the computer its hard to input this formula as it is so we will use
+x and y,
+
+so V = (x , y), this is the magnitude
+
+        ->
+ 	    V
+P ------------->
+P = (x, y), this is pos
+
+         ->
+P' = P + V
+
+		   ->       ->
+P' = (Px + Vx, Py + Vy), P prime is the new location of the player, this
+is the formula needed to update the players pos
+
+---------------------------------- ----------------------------------------
+typedef struct cords
+{
+	float	x;
+	float	y;
+}	cords
+
+
+int main()
+{
+	cords vector;
+	cords ply_pos;
+	cords plyp_pos;
+
+	plyp_pos.x = vector.x + ply_pos.x;
+	plyp_pos.y = vector.y + ply_pos.y;
+}
+---------------------------------- ----------------------------------------
+
+->Subtracting Vectors, used for enemies to come towards the players
+
+			\__/
+		 ~~\(".)/   (enemy) E
+		
+	        /
+	       /
+	  ->  /
+	  V  /
+	    /
+	   /
+	  /
+	 /
+    \/
+
+  \(",)/   (blayr) B
+
+
+so the formula here will be ply - enmy, not the othr way around!!
+	->
+	V = P - E
+
+	->
+	V = (Px - Ex, Py - Ey)
+
+---------------------------------- ----------------------------------------
+typedef struct cords
+{
+	float	x;
+	float	y;
+}	cords
+
+
+int main()
+{
+	cords vector;
+	cords ply_pos;
+	cords enmy_pos;
+	cords enmyp_pos;
+
+	enmyp_pos.x = ply_pos.x - enmy_pos.x;
+	enmyp_pos.y = ply_pos.y - enmy_pos.y;
+}
+---------------------------------- ----------------------------------------
+
+->finding the distance between plyr and enmy(to know how far the enmy should
+travel to reach the plyr)!!
+
+U could even use this to find out the distance between the plyr and a wall!
+
+for explanation take the enmy tryna attack the plyr!
+
+			\__/
+		 ~~\(".)/   (enemy) E
+		
+	        /|
+	       / |
+	  ->  /  |
+	  V  /   |
+	    /    |
+	   /     | y
+	  /      |
+	 /       |
+    \/_______|
+		x
+  \(",)/   (blayr) B
+				->
+  to calculate  V, we could use the pythagoras theorm!
+	 ->
+  so V^2 = x^2 + y^2!
+	   ->
+  so  √V^2 = √(x^2 + y^2)
+	   ->
+	=> V = √(x^2 + y^2)
+
+---------------------------------- ----------------------------------------
+typedef struct cords
+{
+	float	x;
+	float	y;
+}	cords
+
+
+int main()
+{
+	cords vector;// from enmy to plyr
+	cords ply_pos;
+	cords enmy_pos;
+	float length;
+
+	vector.x = ply_pos.x - enmy_pos.x;
+	vector.y = ply_pos.y - enmy_pos.y;
+
+	//length = sqrt(vector.x^2 + vector.y^2); ^ this not known in c bruh so use the following line
+	length = sqrt((vector.x * vector.x) + (vector.y * vector.y));
+
+}
+---------------------------------- ----------------------------------------
+---------------------------------- ----------------------------------------
+#include <math.h>// when using the math header make sure to include flag -lm!!!!!!!!!
+#include <stdio.h>
+
+typedef struct cords
+{
+	double	x;
+	double	y;
+}	t_cords;
+
+
+int main()
+{
+	t_cords	vector;// from enmy to plyr
+	t_cords	ply_pos;
+	t_cords	enmy_pos;
+	double	length;
+
+	ply_pos.x = 0;
+	ply_pos.y = -1;
+	enmy_pos.x = 1;
+	enmy_pos.y = 1;
+	vector.x = ply_pos.x - enmy_pos.x;
+	vector.y = ply_pos.y - enmy_pos.y;
+	printf("v.x => %f, v.y => %f\n", vector.x, vector.y);
+	length = sqrt((vector.x * vector.x) + (vector.y * vector.y));
+	printf("length(distance between enmy and plyr) => %f\n", length);
+}
+
+this is the test program i made, output is:
+
+v.x => -1.000000, v.y => -2.000000
+length(distance between enmy and plyr) => 2.236068
+
+gcc tmp.c -lm && ./a.out
+
+---------------------------------- ----------------------------------------
+---------------------------------- ----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+REF REF REF REF REF REF REF REF REF REF REF REF REF REF
+https://www.youtube.com/watch?v=bk-RyG0KR_I&list=PLW3Zl3wyJwWOpdhYedlD-yCB7WQoHf-My&index=3
