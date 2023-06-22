@@ -1,5 +1,6 @@
 # makefile made for linux poop!!, ask the pro leader for mac and cheese version!!
 
+#linux vesion
 
 .SILENT:
 

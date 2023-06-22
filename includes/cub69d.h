@@ -7,7 +7,7 @@
 # include <errno.h>		// For error handling (perror, strerror)
 # include <stdbool.h>	// For bool types
 # include <unistd.h>	// For ssize_t type
-# include <GLFW/glfw3.h>
+// # include <GLFW/glfw3.h>
 // # include "../mlx/mlx.h"       // add path in makefile, compile mlx lib and bring the little .a here
 # include <mlx.h>
 
