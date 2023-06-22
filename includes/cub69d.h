@@ -43,7 +43,6 @@ typedef struct s_map
 	char		plyr_pos;
 }	t_map;
 
-
 typedef struct s_elmnt
 {
 	int		rd;
@@ -55,17 +54,38 @@ typedef struct s_elmnt
 	t_clr	*clr;
 }	t_elmnt;
 
+typedef struct s_coords
+{
+	double x;
+	double y;
+} t_coords;
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
 typedef struct s_able// table of contents!
 {
 	// int pp;
 	void	*mlx;
 	void 	*win;
+	t_data	img;
 	int		size_x;
 	int 	size_y;
+
+//pixle pos
+	int		x;
+	int		y;
+
 	int		file;
+
+	t_coords	*vec;
+	t_coords	*pos;
 	t_elmnt	*elements;
 }	t_able;
-
 
 void	print_elements(t_able *table);// made just for testing!
 void	print_map(t_able *table);
