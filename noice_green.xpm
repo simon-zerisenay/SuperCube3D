@@ -1,0 +1,9 @@
+	/* XPM */
+static char *noice_green[] = {
+/* columns rows colors chars-per-pixel */
+"1 1 2 1 ",
+"  c #00897B",
+". c white",
+/* pixels */
+" "
+};

@@ -7,11 +7,17 @@
 # include <errno.h>		// For error handling (perror, strerror)
 # include <stdbool.h>	// For bool types
 # include <unistd.h>	// For ssize_t type
+# include <math.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 // # include <GLFW/glfw3.h>
 // # include "../mlx/mlx.h"       // add path in makefile, compile mlx lib and bring the little .a here
 # include <mlx.h>
 
 # define BUFFER_SIZE 69
+# define PI 3.1415926536
+# define P2 PI / 2
+# define P3 3 * PI / 2
 
 typedef struct s_xtr// just turn the variable, into an array! only 4var
 {//just fix the intakes
@@ -71,14 +77,17 @@ typedef struct s_able// table of contents!
 {
 	// int pp;
 	void	*mlx;
-	void 	*win;
+	void	*win;
 	t_data	img;
 	int		size_x;
 	int 	size_y;
-
-//pixle pos
+	double	delx;
+	double	dely;
+	double	a;
 	int		x;
 	int		y;
+
+//pixle pos
 
 	int		file;
 
@@ -125,3 +134,5 @@ int			per_ret(void);
 int			free_ret(void *ptr);
 
 # endif
+
+

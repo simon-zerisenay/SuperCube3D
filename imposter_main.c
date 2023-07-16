@@ -51,9 +51,9 @@ int key_hook(int keycode, t_vars *table)
 
 int	main(void)
 {
-    t_vars  var;
-    var.x = 64;
-    var.y = 64;
+	t_vars  var;
+	var.x = 64;
+	var.y = 64;
 	var.mlx = mlx_init();
 	var.win = mlx_new_window(var.mlx, 1920, 1080, "Hello world!");
 	var.img.img = mlx_new_image(var.mlx, 1920, 1080);

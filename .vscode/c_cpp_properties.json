@@ -1,9 +1,4 @@
 {
-	"files.associations": {
-		"fcntl.h": "c",
-		"mlx.h": "c"
-	},
-	
 	"configurations": [
 		{
 			"name": "Linux",

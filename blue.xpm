@@ -1,0 +1,8 @@
+/* XPM */
+static char * blue_pixel[] = {
+"1 1 2 1",
+" 	c None",
+".	c #0000FF",
+" ",
+"."
+};
