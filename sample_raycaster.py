@@ -4,7 +4,7 @@
 # from OpenGL.GLU import *
 # from math import cos, sin
 
-# # Dimensions of the game window 
+# # Dimensions of the game window  
 # WINDOW_WIDTH = 800
 # WINDOW_HEIGHT = 600
 
