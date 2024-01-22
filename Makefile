@@ -18,7 +18,7 @@ CFLAGS_CMP = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 # CFLAGS_CMP = -g3 -Imlx -framework OpenGL -framework AppKit
 
 UTILS = ${addprefix utils/, utils0.c err_msg.c mem_utils.c free_heap.c}
-
+ 
 PARSING = ${addprefix parsing/, chk_args.c quality_control.c map_arser.c}
 
 # EXECUTION = ${addprefix execution/, execution.c init.c}
