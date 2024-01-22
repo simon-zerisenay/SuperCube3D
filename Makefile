@@ -6,7 +6,7 @@
 NAME = cub3D
 #opengl 
 # CFLAGS = -g3 -Wall -Werror -Wextra -lincludes -lglfw -lGL #to be used with opengl
-#linux
+#linux 
 CFLAGS = -Wall -Wextra -Werror -Iincludes -I/usr/include -Imlx_linux -O3 #to be used with opengl
 #mac
 # CFLAGS = -g3 -Wall -Wextra -Werror -Iincludes -Imlx #to be used with opengl
