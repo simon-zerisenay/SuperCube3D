@@ -3,7 +3,7 @@
 #linux vesion
 
 .SILENT:
-
+ 
 NAME = cub3D
 #opengl
 # CFLAGS = -g3 -Wall -Werror -Wextra -lincludes -lglfw -lGL #to be used with opengl
